@@ -1,5 +1,5 @@
 <div align="center">
-    <img width="180" src="./public/media/icon.png" alt="ZingFont">
+    <img width="180" src="https://zingfont.com/logo-zingfont-new.svg" alt="ZingFont">
     <h1 align="center">ZingFont Windows App</h1>
     <p align="center">This project is based on <a href="https://github.com/SeakMengs/WindowPet">Window Pet</a>, thanks to <a href="https://github.com/SeakMengs">SeakMengs</a> for the great work and allowing me to use his code as a base for this project.
     </p>
