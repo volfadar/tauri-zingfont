@@ -1,10 +1,10 @@
 {
-    "theme": "dark",
-    "language": "en",
-    "allowPetAboveTaskbar": false,
-    "allowPetInteraction": true,
-    "allowPetClimbing": true,
-    "allowAutoStartUp": false,
-    "allowOverridePetScale": true,
-    "petScale": 0.7
+  "theme": "dark",
+  "language": "en",
+  "allowFontAboveTaskbar": false,
+  "allowFontInteraction": true,
+  "allowFontClimbing": true,
+  "allowAutoStartUp": false,
+  "allowOverrideFontScale": true,
+  "petScale": 0.7
 }

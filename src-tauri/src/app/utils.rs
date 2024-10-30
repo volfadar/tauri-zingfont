@@ -9,7 +9,7 @@ pub async fn reopen_main_window(app: tauri::AppHandle) {
         .resizable(false)
         .transparent(true)
         .always_on_top(true)
-        .title("WindowPet")
+        .title("ZingFont")
         .skip_taskbar(true)
         .build()
         .unwrap();
@@ -23,7 +23,7 @@ pub fn open_setting_window(app: tauri::AppHandle) {
     let settings = AppConfig::new();
     let _window =
         tauri::WindowBuilder::new(&app, "setting", tauri::WindowUrl::App("/setting".into()))
-            .title("WindowPet Setting")
+            .title("ZingFont Setting")
             .inner_size(1000.0, 650.0)
             // .min_inner_size(1280.0, 650.0)
             .theme(if settings.get_theme() == "dark" {

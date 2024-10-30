@@ -1,20 +1,16 @@
 import { Avatar, Text, Group } from "@mantine/core";
 
 function Logo() {
-
-  return (
-    <>
-      {/* <Group> */}
-        <Avatar
-          src="/media/icon.png"
-          alt="WindowPet"
-        />
-        {/* <Text component="h1">
-          WindowPet
+	return (
+		<>
+			{/* <Group> */}
+			<Avatar src="/media/icon.png" alt="ZingFont" />
+			{/* <Text component="h1">
+          ZingFont
         </Text> */}
-      {/* </Group> */}
-    </>
-  );
+			{/* </Group> */}
+		</>
+	);
 }
 
 export default Logo;

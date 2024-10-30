@@ -45,7 +45,7 @@ fn build_app() {
                 .unwrap_or_else(|err| println!("{:?}", err));
             
             conf::if_app_config_does_not_exist_create_default(app, "settings.json");
-            conf::if_app_config_does_not_exist_create_default(app, "pets.json");
+            conf::if_app_config_does_not_exist_create_default(app, "fonts.json");
             info!("app started");
             Ok(())
         })

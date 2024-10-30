@@ -1,10 +1,10 @@
 [package]
-name = "window_pet"
+name = "zingfont"
 version = "0.0.8"
-description = "Window Pet"
+description = "ZingFont - Free Font Library"
 authors = ["SeakMengs"]
 license = "MIT"
-repository = "https://github.com/SeakMengs/WindowPet"
+repository = "https://github.com/volfadar/tauri-zingfont.git"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html

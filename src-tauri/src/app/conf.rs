@@ -23,8 +23,8 @@ impl AppConfig {
                 AppConfig {
                     theme: json["app"]["theme"].as_str().unwrap().to_string(),
                     language: json["app"]["language"].as_str().unwrap().to_string(),
-                    allow_pet_above_taskbar: json["app"]["allowPetAboveTaskbar"].as_bool().unwrap(),
-                    allow_pet_interaction: json["app"]["allowPetInteraction"].as_bool().unwrap(),
+                    allow_pet_above_taskbar: json["app"]["allowFontAboveTaskbar"].as_bool().unwrap(),
+                    allow_pet_interaction: json["app"]["allowFontInteraction"].as_bool().unwrap(),
                 }
             }
             Err(err) => {
@@ -54,7 +54,7 @@ pub fn convert_path(path_str: &str) -> Option<String> {
 }
 
 pub fn app_root() -> PathBuf {
-    tauri::api::path::config_dir().unwrap().join("WindowPet")
+    tauri::api::path::config_dir().unwrap().join("ZingFont")
 }
 
 #[tauri::command(rename_all = "snake_case")]
@@ -67,7 +67,7 @@ pub fn if_app_config_does_not_exist_create_default(app: &mut App, config_name: &
     if !Path::new(&setting_path).exists() {
         let default_config = match config_name {
             "settings.json" => include_str!("default/settings.json"),
-            "pets.json" => include_str!("default/pets.json"),
+            "fonts.json" => include_str!("default/fonts.json"),
             _ => return,
         };
         let json_data: serde_json::Value = serde_json::from_str(default_config).unwrap();

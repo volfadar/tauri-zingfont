@@ -29,8 +29,8 @@ pub fn handle_tray_event(app: &AppHandle, event: SystemTrayEvent) {
                         println!("Window already exists");
                         tauri::api::dialog::message(
                             Some(&window),
-                            "WindowPet Dialog",
-                            "Pet already exist",
+                            "ZingFont Dialog",
+                            "Font already exist",
                         );
                     }
                     None => {
@@ -55,8 +55,8 @@ pub fn handle_tray_event(app: &AppHandle, event: SystemTrayEvent) {
                 Some(window) => {
                     tauri::api::dialog::message(
                         Some(&window),
-                        "WindowPet Dialog",
-                        "WindowPet setting already exist",
+                        "ZingFont Dialog",
+                        "ZingFont setting already exist",
                     );
                     println!("Window setting already exist");
                 }
@@ -65,11 +65,11 @@ pub fn handle_tray_event(app: &AppHandle, event: SystemTrayEvent) {
                 }
             },
             "restart" => {
-                info!("Restart WindowPet");
+                info!("Restart ZingFont");
                 app.restart();
             }
             "quit" => {
-                info!("Quit WindowPet");
+                info!("Quit ZingFont");
                 app.exit(0);
             }
             _ => {}
@@ -84,8 +84,8 @@ pub fn handle_tray_event(app: &AppHandle, event: SystemTrayEvent) {
             Some(window) => {
                 tauri::api::dialog::message(
                     Some(&window),
-                    "WindowPet Dialog",
-                    "WindowPet setting already exist",
+                    "ZingFont Dialog",
+                    "ZingFont setting already exist",
                 );
                 println!("Window setting already exists");
             }
