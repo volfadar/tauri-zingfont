@@ -58,7 +58,7 @@ const defaultStateInfo = {
 
 function AddFont() {
 	const { refetch } = useDefaultFonts();
-	const [petInfo, setFontInfo] = useState<IFontInfo>({
+	const [fontInfo, setFontInfo] = useState<IFontInfo>({
 		imageSrc: "",
 		frameSize: 1,
 		name: "",
@@ -79,22 +79,22 @@ function AddFont() {
 				},
 			],
 		})) as string;
-		if (filePath) setFontInfo({ ...petInfo, imageSrc: filePath });
+		if (filePath) setFontInfo({ ...fontInfo, imageSrc: filePath });
 	};
 
 	const addMoreState = () => {
-		const newStateArr = petInfo.states;
+		const newStateArr = fontInfo.states;
 		// clone the object otherwise it will use the same reference causing all state to have the same value
 		newStateArr.push(structuredClone(defaultStateInfo));
-		setFontInfo({ ...petInfo, states: newStateArr });
+		setFontInfo({ ...fontInfo, states: newStateArr });
 	};
 
 	const removeStateAtIndex = (removeAtIndex: number) => {
-		if (petInfo.states.length === 1) return;
+		if (fontInfo.states.length === 1) return;
 
-		const newStateArr = petInfo.states;
+		const newStateArr = fontInfo.states;
 		newStateArr.splice(removeAtIndex, 1);
-		setFontInfo({ ...petInfo, states: newStateArr });
+		setFontInfo({ ...fontInfo, states: newStateArr });
 	};
 
 	const combineStateToObject = () => {
@@ -104,17 +104,17 @@ function AddFont() {
 				end: number;
 			};
 		} = {};
-		petInfo.states.forEach((petStates) => {
-			states[petStates.stateName] = {
-				start: petStates.start,
-				end: petStates.end,
+		fontInfo.states.forEach((fontStates) => {
+			states[fontStates.stateName] = {
+				start: fontStates.start,
+				end: fontStates.end,
 			};
 		});
 
 		return {
-			frameSize: petInfo.frameSize,
-			imageSrc: petInfo.imageSrc,
-			name: petInfo.name,
+			frameSize: fontInfo.frameSize,
+			imageSrc: fontInfo.imageSrc,
+			name: fontInfo.name,
 			states: states,
 		};
 	};
@@ -125,30 +125,30 @@ function AddFont() {
 	 */
 	const validateCustomFontObject = async () => {
 		let isValid = true;
-		const tempFontInfo = structuredClone(petInfo);
+		const tempFontInfo = structuredClone(fontInfo);
 
-		if (!petInfo.name) {
+		if (!fontInfo.name) {
 			tempFontInfo.nameError = t("Font name is required");
 			isValid = false;
 		} else {
 			tempFontInfo.nameError = null;
 		}
 
-		if (!petInfo.imageSrc) {
-			petInfo.imageSrcError = t("Spritesheet path is required");
+		if (!fontInfo.imageSrc) {
+			fontInfo.imageSrcError = t("Spritesheet path is required");
 			isValid = false;
 		} else {
 			tempFontInfo.imageSrcError = null;
 		}
 
-		if (!petInfo.frameSize) {
+		if (!fontInfo.frameSize) {
 			tempFontInfo.frameSizeError = t("Frame size is required");
 			isValid = false;
 		} else {
 			tempFontInfo.frameSizeError = null;
 		}
 
-		const imageSrcExist = await exists(petInfo.imageSrc);
+		const imageSrcExist = await exists(fontInfo.imageSrc);
 		if (!imageSrcExist) {
 			tempFontInfo.imageSrcError = t(
 				"Spritesheet path provided does not exist",
@@ -211,18 +211,20 @@ function AddFont() {
 		return isValid;
 	};
 
-	const FontStates = petInfo.states.map((petState, index) => {
+	const FontStates = fontInfo.states.map((fontState, index) => {
 		return (
 			<Accordion.Item
 				value={index.toString()}
 				key={index}
 				className={clsx({
 					[classes.errorBorder]:
-						petState.stateNameError || petState.startError || petState.endError,
+						fontState.stateNameError ||
+						fontState.startError ||
+						fontState.endError,
 				})}
 			>
 				<Accordion.Control>
-					{petState.stateName || t("State")}
+					{fontState.stateName || t("State")}
 				</Accordion.Control>
 				<Accordion.Panel>
 					<Stack gap={"sm"}>
@@ -230,38 +232,38 @@ function AddFont() {
 							<TextInput
 								label={t("State name")}
 								placeholder={t("State name")}
-								error={petState.stateNameError}
-								value={petState.stateName}
+								error={fontState.stateNameError}
+								value={fontState.stateName}
 								onChange={(event) => {
-									const newStateArr = petInfo.states;
+									const newStateArr = fontInfo.states;
 									newStateArr[index].stateName = event.target.value;
-									setFontInfo({ ...petInfo, states: newStateArr });
+									setFontInfo({ ...fontInfo, states: newStateArr });
 								}}
 							/>
 							{/* start */}
 							<NumberInput
 								label={t("Start")}
 								placeholder={t("Start number")}
-								error={petState.startError}
+								error={fontState.startError}
 								min={1}
-								value={petState.start}
+								value={fontState.start}
 								onChange={(value) => {
-									const newStateArr = petInfo.states;
+									const newStateArr = fontInfo.states;
 									newStateArr[index].start = Number(value);
-									setFontInfo({ ...petInfo, states: newStateArr });
+									setFontInfo({ ...fontInfo, states: newStateArr });
 								}}
 							/>
 							{/* end */}
 							<NumberInput
 								label={t("End")}
 								placeholder={t("End number")}
-								error={petState.endError}
+								error={fontState.endError}
 								min={1}
-								value={petState.end}
+								value={fontState.end}
 								onChange={(value) => {
-									const newStateArr = petInfo.states;
+									const newStateArr = fontInfo.states;
 									newStateArr[index].end = Number(value);
-									setFontInfo({ ...petInfo, states: newStateArr });
+									setFontInfo({ ...fontInfo, states: newStateArr });
 								}}
 							/>
 						</Group>
@@ -270,7 +272,7 @@ function AddFont() {
 								variant={ButtonVariant}
 								color="red"
 								leftSection={<IconTrash />}
-								disabled={petInfo.states.length === 1}
+								disabled={fontInfo.states.length === 1}
 								onClick={() => removeStateAtIndex(index)}
 							>
 								{t("Remove state")}
@@ -289,29 +291,29 @@ function AddFont() {
 					<TextInput
 						label={t("Font name")}
 						placeholder={t("Font name")}
-						error={petInfo.nameError}
-						value={petInfo.name}
+						error={fontInfo.nameError}
+						value={fontInfo.name}
 						onChange={(event) =>
-							setFontInfo({ ...petInfo, name: event.target.value })
+							setFontInfo({ ...fontInfo, name: event.target.value })
 						}
 					/>
 					<NumberInput
 						min={1}
 						label={t("Frame size")}
 						placeholder={t("Frame size")}
-						error={petInfo.frameSizeError}
-						value={petInfo.frameSize}
+						error={fontInfo.frameSizeError}
+						value={fontInfo.frameSize}
 						onChange={(value) =>
-							setFontInfo({ ...petInfo, frameSize: Number(value) })
+							setFontInfo({ ...fontInfo, frameSize: Number(value) })
 						}
 					/>
 					<TextInput
 						label={t("Spritesheet path")}
 						placeholder={t("Spritesheet path")}
-						error={petInfo.imageSrcError}
-						value={petInfo.imageSrc}
+						error={fontInfo.imageSrcError}
+						value={fontInfo.imageSrc}
 						onChange={(event) =>
-							setFontInfo({ ...petInfo, imageSrc: event.target.value })
+							setFontInfo({ ...fontInfo, imageSrc: event.target.value })
 						}
 						rightSection={
 							<Tooltip

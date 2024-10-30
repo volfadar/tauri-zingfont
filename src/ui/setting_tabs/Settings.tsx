@@ -25,7 +25,7 @@ function Settings() {
 		allowFontAboveTaskbar,
 		allowFontInteraction,
 		allowOverrideFontScale,
-		petScale,
+		fontScale,
 		allowFontClimbing,
 	} = useSettingStore();
 
@@ -71,7 +71,7 @@ function Settings() {
 				<Slider
 					min={0.1}
 					max={1}
-					defaultValue={petScale}
+					defaultValue={fontScale}
 					my={"sm"}
 					step={0.1}
 					onChangeEnd={(value) =>

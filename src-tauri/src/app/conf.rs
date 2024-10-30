@@ -10,8 +10,8 @@ use tauri_plugin_store::StoreBuilder;
 pub struct AppConfig {
     pub theme: String,
     pub language: String,
-    pub allow_pet_above_taskbar: bool,
-    pub allow_pet_interaction: bool,
+    pub allow_font_above_taskbar: bool,
+    pub allow_font_interaction: bool,
 }
 
 impl AppConfig {
@@ -23,8 +23,8 @@ impl AppConfig {
                 AppConfig {
                     theme: json["app"]["theme"].as_str().unwrap().to_string(),
                     language: json["app"]["language"].as_str().unwrap().to_string(),
-                    allow_pet_above_taskbar: json["app"]["allowFontAboveTaskbar"].as_bool().unwrap(),
-                    allow_pet_interaction: json["app"]["allowFontInteraction"].as_bool().unwrap(),
+                    allow_font_above_taskbar: json["app"]["allowFontAboveTaskbar"].as_bool().unwrap(),
+                    allow_font_interaction: json["app"]["allowFontInteraction"].as_bool().unwrap(),
                 }
             }
             Err(err) => {
@@ -32,8 +32,8 @@ impl AppConfig {
                 AppConfig {
                     theme: "dark".to_string(),
                     language: "en".to_string(),
-                    allow_pet_above_taskbar: false,
-                    allow_pet_interaction: true,
+                    allow_font_above_taskbar: false,
+                    allow_font_interaction: true,
                 }
             }
         }

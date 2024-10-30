@@ -57,18 +57,18 @@ function FontShop() {
 
 	const removeCustomFont = useCallback(
 		async (font: ISpriteConfig) => {
-			const petLinker = await getAppSettings({
-				configName: DefaultConfigName.PET_LINKER,
+			const fontLinker = await getAppSettings({
+				configName: DefaultConfigName.font_LINKER,
 			});
 
-			if (!petLinker) return;
+			if (!fontLinker) return;
 
 			// remove custom font from linker
-			const newFontLinker = petLinker.filter(
+			const newFontLinker = fontLinker.filter(
 				(p: ISpriteConfig) => p.name === font.name,
 			);
 			setConfig({
-				configName: DefaultConfigName.PET_LINKER,
+				configName: DefaultConfigName.font_LINKER,
 				newConfig: newFontLinker,
 			});
 
@@ -89,8 +89,10 @@ function FontShop() {
 				}),
 			});
 
-			const petCardDom = document.getElementById(`petCard-id-${font.customId}`);
-			if (petCardDom) petCardDom.remove();
+			const fontCardDom = document.getElementById(
+				`fontCard-id-${font.customId}`,
+			);
+			if (fontCardDom) fontCardDom.remove();
 			refetch();
 		},
 		[t, refetch, colorScheme],

@@ -126,17 +126,17 @@ export async function getNoneExistingConfigFileName({
 
 async function updateCustomFontConfig(newCustomFontPath: string) {
 	const customFontConfigPath: string = await invoke("combine_config_path", {
-		config_name: DefaultConfigName.PET_LINKER,
+		config_name: DefaultConfigName.font_LINKER,
 	});
 	if (await exists(customFontConfigPath)) {
 		const customFontConfig = await getAppSettings({
-			configName: DefaultConfigName.PET_LINKER,
+			configName: DefaultConfigName.font_LINKER,
 		});
 
 		if (customFontConfig) {
 			customFontConfig.push(newCustomFontPath);
 			setConfig({
-				configName: DefaultConfigName.PET_LINKER,
+				configName: DefaultConfigName.font_LINKER,
 				newConfig: customFontConfig,
 			});
 			return;
@@ -144,22 +144,22 @@ async function updateCustomFontConfig(newCustomFontPath: string) {
 	}
 
 	setConfig({
-		configName: DefaultConfigName.PET_LINKER,
+		configName: DefaultConfigName.font_LINKER,
 		newConfig: [newCustomFontPath],
 	});
 }
 
-export async function saveCustomFont(petObject: IFontObject) {
+export async function saveCustomFont(fontObject: IFontObject) {
 	try {
-		info(`Start saving custom font, font name: ${petObject.name}`);
-		petObject.customId = crypto.randomUUID();
+		info(`Start saving custom font, font name: ${fontObject.name}`);
+		fontObject.customId = crypto.randomUUID();
 		const uniqueFontFileName = await getNoneExistingConfigFileName({
-			configName: petObject.name as string,
+			configName: fontObject.name as string,
 			folderName: "custom-fonts/",
 			extension: ".json",
 		});
-		const userImageSrc = petObject.imageSrc as string;
-		petObject.imageSrc = (await invoke("combine_config_path", {
+		const userImageSrc = fontObject.imageSrc as string;
+		fontObject.imageSrc = (await invoke("combine_config_path", {
 			config_name: `assets/${uniqueFontFileName}.png`,
 		})) as string;
 
@@ -168,11 +168,11 @@ export async function saveCustomFont(petObject: IFontObject) {
 			dir: BaseDirectory.AppConfig,
 			recursive: true,
 		});
-		await copyFile(userImageSrc, petObject.imageSrc);
+		await copyFile(userImageSrc, fontObject.imageSrc);
 
 		setConfig({
 			configName: `custom-fonts/${uniqueFontFileName}.json`,
-			newConfig: petObject,
+			newConfig: fontObject,
 		});
 
 		// this config is the one that will be used to load custom fonts (act as a list of custom fonts)
@@ -186,10 +186,10 @@ export async function saveCustomFont(petObject: IFontObject) {
 			title: i18next.t("Custom Font Added"),
 			message: i18next.t(
 				"font name has been added to your custom font list, restart ZingFont and check font shop to spawn your custom font",
-				{ name: petObject.name },
+				{ name: fontObject.name },
 			),
 		});
-		info(`Successfully save custom font, font name: ${petObject.name}`);
+		info(`Successfully save custom font, font name: ${fontObject.name}`);
 	} catch (err) {
 		error(`Error at saveCustomFont: ${err}`);
 		showNotification({

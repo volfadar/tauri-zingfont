@@ -1,5 +1,5 @@
 import { type UseQueryResult, useQuery } from "react-query";
-import defaultFontConfig from "../config/pet_config";
+import defaultFontConfig from "../config/font_config";
 import { DefaultConfigName } from "../types/ISetting";
 import { type ISpriteConfig, SpriteType } from "../types/ISpriteConfig";
 import { noFontDialog } from "../utils";
@@ -46,14 +46,14 @@ const getDefaultFonts = async () => {
 		JSON.stringify(defaultFontConfig),
 	);
 	const customFonts = await getAppSettings({
-		configName: DefaultConfigName.PET_LINKER,
+		configName: DefaultConfigName.font_LINKER,
 		withErrorDialog: false,
 	});
 
 	if (customFonts && customFonts.length > 0) {
-		for (const petPath of customFonts) {
+		for (const fontPath of customFonts) {
 			const font: ISpriteConfig = await getAppSettings({
-				configName: petPath,
+				configName: fontPath,
 				withErrorDialog: false,
 			});
 			if (!font) continue;

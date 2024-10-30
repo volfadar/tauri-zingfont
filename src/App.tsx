@@ -40,7 +40,7 @@ function App() {
 								defaultColorScheme={ColorSchemeType.Dark}
 								theme={{
 									fontFamily:
-										"cursive, Siemreap, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji",
+										"Plus Jakarta Sans, Siemreap, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji",
 									colors: {
 										dark: [
 											"#C1C2C5",

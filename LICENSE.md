@@ -306,7 +306,7 @@ modification has been made.
   If you convey an object code work under this section in, or with, or
 specifically for use in, a User Product, and the conveying occurs as
 part of a transaction in which the right of possession and use of the
-User Product is transferred to the recipient in perpetuity or for a
+User Product is transferred to the recipient in perfontuity or for a
 fixed term (regardless of how the transaction is characterized), the
 Corresponding Source conveyed under this section must be accompanied
 by the Installation Information.  But this requirement does not apply

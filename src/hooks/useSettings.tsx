@@ -45,7 +45,7 @@ const getSettings = async () => {
 	setAllowOverrideFontScale(
 		setting.allowOverrideFontScale ?? defaultSettings.allowOverrideFontScale,
 	);
-	setFontScale(setting.petScale ?? defaultSettings.petScale);
+	setFontScale(setting.fontScale ?? defaultSettings.fontScale);
 };
 
 export function useSettings() {

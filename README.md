@@ -1,7 +1,7 @@
 <div align="center">
     <img width="180" src="https://zingfont.com/logo-zingfont-new.svg" alt="ZingFont">
     <h1 align="center">ZingFont Windows App</h1>
-    <p align="center">This project is based on <a href="https://github.com/SeakMengs/WindowPet">Window Pet</a>, thanks to <a href="https://github.com/SeakMengs">SeakMengs</a> for the great work and allowing me to use his code as a base for this project.
+    <p align="center">This project is based on <a href="https://github.com/volfadar/Windowfont">Window font</a>, thanks to <a href="https://github.com/volfadar">volfadar</a> for the great work and allowing me to use his code as a base for this project.
     </p>
 </div>
 
@@ -29,11 +29,11 @@
 
 ## ✨ Inspiration
 
-- TOP Inspiration:[Window Pet](https://github.com/SeakMengs/WindowPet)
-- SeakMengs friend [Blizzard4E](https://github.com/Blizzard4E) for suggesting me this project idea
+- TOP Inspiration:[Window font](https://github.com/volfadar/Windowfont)
+- volfadar friend [Blizzard4E](https://github.com/Blizzard4E) for suggesting me this project idea
 - [vscode-fonts](https://marketplace.visualstudio.com/items?itemName=tonybaloney.vscode-fonts)
 - [Shimeji-ee Desktop Font](https://kilkakon.com/shimeji/)
-- [DPET : Desktop Font Engine](https://store.steampowered.com/app/1980920/DPET__Desktop_Font_Engine/)
+- [Dfont : Desktop Font Engine](https://store.steampowered.com/app/1980920/Dfont__Desktop_Font_Engine/)
 
 ## ✨ License
 

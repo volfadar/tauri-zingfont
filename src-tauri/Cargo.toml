@@ -2,8 +2,8 @@
 name = "zingfont"
 version = "0.0.8"
 description = "ZingFont - Free Font Library"
-authors = ["SeakMengs"]
-license = "MIT"
+authors = ["volfadar"]
+license = "GNU AFFERO GENERAL PUBLIC LICENSE Version 3, 19 November 2007"
 repository = "https://github.com/volfadar/tauri-zingfont.git"
 edition = "2021"
 

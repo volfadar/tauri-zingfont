@@ -2,15 +2,15 @@ import { create } from "zustand";
 import type { IFontStateStore } from "../types/hooks/type";
 
 export const useFontStateStore = create<IFontStateStore>((set) => ({
-	petStates: {},
+	fontStates: {},
 	setFontStates: (newFontStates) => {
-		set({ petStates: newFontStates });
+		set({ fontStates: newFontStates });
 	},
-	storeDictFontStates(petName, petState) {
+	storeDictFontStates(fontName, fontState) {
 		set((state) => ({
-			petStates: {
-				...state.petStates,
-				[petName]: petState,
+			fontStates: {
+				...state.fontStates,
+				[fontName]: fontState,
 			},
 		}));
 	},

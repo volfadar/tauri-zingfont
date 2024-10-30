@@ -61,7 +61,7 @@
     "updater": {
       "active": true,
       "dialog": false,
-      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDZERTQ3OTFEMzhDNTJEOUEKUldTYUxjVTRIWG5rYmFYak50OVBjTnBORHQ5TE5WeHJDMGNHbEJZdWxoa0RvbFEyUDVPSno1NTEK",
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDI4OTJGRDlEMzY2NUY2N0QKUldSOTltVTJuZjJTS09Nd3hGam5pcWFOM1VHcVVyNGtDd3FYU0ZXVmIrTkZXT1NMYVpZak53T1MK",
       "endpoints": [
         "https://github.com/volfadar/tauri-zingfont.git/releases/latest/download/latest.json"
       ],

@@ -9,7 +9,7 @@ export interface ISettingStoreVariables {
 	allowFontInteraction: boolean;
 	allowFontClimbing: boolean;
 	allowOverrideFontScale: boolean;
-	petScale: number;
+	fontScale: number;
 	fonts: ISpriteConfig[];
 	defaultFont: ISpriteConfig[];
 }
@@ -22,7 +22,7 @@ export interface ISettingStoreState extends ISettingStoreVariables {
 	setAllowFontInteraction: (newBoolean: boolean) => void;
 	setAllowFontClimbing: (newBoolean: boolean) => void;
 	setAllowOverrideFontScale: (newBoolean: boolean) => void;
-	setFontScale: (petScale: number) => void;
+	setFontScale: (fontScale: number) => void;
 	setFonts: (newFonts: ISpriteConfig[]) => void;
 	setDefaultFont: (newDefaultFont: ISpriteConfig[]) => void;
 }
@@ -33,7 +33,7 @@ export interface ISettingTabState {
 }
 
 export interface IFontStateStore {
-	petStates: Record<string, Array<string>>;
+	fontStates: Record<string, Array<string>>;
 	setFontStates: (newFontStates: Record<string, Array<string>>) => void;
-	storeDictFontStates: (petName: string, petState: Array<string>) => void;
+	storeDictFontStates: (fontName: string, fontState: Array<string>) => void;
 }

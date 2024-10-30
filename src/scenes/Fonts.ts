@@ -29,7 +29,7 @@ export default class Fonts extends Phaser.Scene {
 	private isFlipped = false;
 	private frameCount = 0;
 	// use this array to store index of font that is currently climb and crawl
-	private petClimbAndCrawlIndex: number[] = [];
+	private fontClimbAndCrawlIndex: number[] = [];
 
 	private configManager: ConfigManager;
 	// input manager to handle mouse, toggle cursor events to ignore cursor events when mouse is over font
@@ -39,7 +39,7 @@ export default class Fonts extends Phaser.Scene {
 	private allowFontInteraction: boolean;
 	private allowFontAboveTaskbar: boolean;
 	private allowOverrideFontScale: boolean;
-	private petScale: number;
+	private fontScale: number;
 	private allowFontClimbing: boolean;
 
 	private readonly FORBIDDEN_RAND_STATE: string[] = [
@@ -53,8 +53,8 @@ export default class Fonts extends Phaser.Scene {
 	];
 	private readonly FRAME_RATE: number = 9;
 	private readonly UPDATE_DELAY: number = 1000 / this.FRAME_RATE;
-	private readonly PET_MOVE_VELOCITY: number = this.FRAME_RATE * 6;
-	private readonly PET_MOVE_ACCELERATION: number = this.PET_MOVE_VELOCITY * 2;
+	private readonly font_MOVE_VELOCITY: number = this.FRAME_RATE * 6;
+	private readonly font_MOVE_ACCELERATION: number = this.font_MOVE_VELOCITY * 2;
 	private readonly TWEEN_ACCELERATION: number = this.FRAME_RATE * 1.1;
 	private readonly RAND_STATE_DELAY: number = 3000;
 	private readonly FLIP_DELAY: number = 5000;
@@ -72,8 +72,8 @@ export default class Fonts extends Phaser.Scene {
 		this.allowOverrideFontScale =
 			useSettingStore.getState().allowOverrideFontScale ??
 			defaultSettings.allowOverrideFontScale;
-		this.petScale =
-			useSettingStore.getState().petScale ?? defaultSettings.petScale;
+		this.fontScale =
+			useSettingStore.getState().fontScale ?? defaultSettings.fontScale;
 		this.allowFontClimbing =
 			useSettingStore.getState().allowFontClimbing ??
 			defaultSettings.allowFontClimbing;
@@ -181,7 +181,7 @@ export default class Fonts extends Phaser.Scene {
 				},
 			});
 
-			this.petBeyondScreenSwitchClimb(font, {
+			this.fontBeyondScreenSwitchClimb(font, {
 				up: this.getFontBoundTop(font),
 				down: this.getFontBoundDown(font),
 				left: this.getFontBoundLeft(font),
@@ -206,14 +206,14 @@ export default class Fonts extends Phaser.Scene {
 						this.configManager.getStateName("crawl", font)
 				) {
 					if (left || right) {
-						this.petJumpOrPlayRandomState(font);
+						this.fontJumpOrPlayRandomState(font);
 					}
 					return;
 				}
 
 				if (up) {
 					if (!this.allowFontClimbing) {
-						this.petJumpOrPlayRandomState(font);
+						this.fontJumpOrPlayRandomState(font);
 						return;
 					}
 
@@ -221,17 +221,17 @@ export default class Fonts extends Phaser.Scene {
 						this.switchState(font, "crawl");
 						return;
 					}
-					this.petJumpOrPlayRandomState(font);
+					this.fontJumpOrPlayRandomState(font);
 				} else if (down) {
 					this.switchStateAfterFontJump(font);
-					this.petOnTheGroundPlayRandomState(font);
+					this.fontOnTheGroundPlayRandomState(font);
 				}
 
 				/*
 				 * this will check on the ground and mid air if font is beyond screen
 				 * and change font state accordingly
 				 */
-				this.petBeyondScreenSwitchClimb(font, {
+				this.fontBeyondScreenSwitchClimb(font, {
 					up: up,
 					down: down,
 					left: left,
@@ -255,7 +255,7 @@ export default class Fonts extends Phaser.Scene {
 						// when the user switch from font above taskbar to not above taskbar, there will be a little space for font, we force font to jump or play random state
 						if (!this.allowFontAboveTaskbar) {
 							this.fonts.forEach((font) => {
-								this.petJumpOrPlayRandomState(font);
+								this.fontJumpOrPlayRandomState(font);
 							});
 						}
 
@@ -272,8 +272,8 @@ export default class Fonts extends Phaser.Scene {
 					case DispatchType.OverrideFontScale:
 						this.allowOverrideFontScale = event.payload.value as boolean;
 						this.allowOverrideFontScale
-							? this.scaleAllFonts(this.petScale)
-							: this.scaleAllFonts(defaultSettings.petScale);
+							? this.scaleAllFonts(this.fontScale)
+							: this.scaleAllFonts(defaultSettings.fontScale);
 						break;
 					case DispatchType.SwitchAllowFontClimbing:
 						this.allowFontClimbing = event.payload.value as boolean;
@@ -281,13 +281,13 @@ export default class Fonts extends Phaser.Scene {
 						// when the user switch from font climb to not climb, we force font to jump or play random state
 						if (!this.allowFontClimbing) {
 							this.fonts.forEach((font) => {
-								this.petJumpOrPlayRandomState(font);
+								this.fontJumpOrPlayRandomState(font);
 							});
 						}
 						break;
 					case DispatchType.ChangeFontScale:
-						this.petScale = event.payload.value as number;
-						this.scaleAllFonts(this.petScale);
+						this.fontScale = event.payload.value as number;
+						this.scaleAllFonts(this.fontScale);
 						break;
 					default:
 						break;
@@ -319,17 +319,17 @@ export default class Fonts extends Phaser.Scene {
 			this.physics.world.bounds.width - 100,
 		);
 		// make the font jump from the top of the screen
-		const petY = 0 + this.configManager.getFrameSize(sprite).frameHeight;
+		const fontY = 0 + this.configManager.getFrameSize(sprite).frameHeight;
 		this.fonts[index] = this.physics.add
-			.sprite(randomX, petY, sprite.name)
+			.sprite(randomX, fontY, sprite.name)
 			.setInteractive({
 				draggable: true,
 				pixelPerfect: true,
 			}) as Font;
 
 		this.allowOverrideFontScale
-			? this.scaleFont(this.fonts[index], this.petScale)
-			: this.scaleFont(this.fonts[index], defaultSettings.petScale);
+			? this.scaleFont(this.fonts[index], this.fontScale)
+			: this.scaleFont(this.fonts[index], defaultSettings.fontScale);
 
 		this.fonts[index].setCollideWorldBounds(true, 0, 0, true);
 
@@ -339,27 +339,27 @@ export default class Fonts extends Phaser.Scene {
 		this.fonts[index].canRandomFlip = true;
 		this.fonts[index].id = sprite.id as string;
 
-		this.petJumpOrPlayRandomState(this.fonts[index]);
+		this.fontJumpOrPlayRandomState(this.fonts[index]);
 	}
 
-	removeFont(petId: string): void {
+	removeFont(fontId: string): void {
 		this.fonts = this.fonts.filter((font: Font, index: number) => {
-			if (font.id === petId) {
+			if (font.id === fontId) {
 				font.destroy();
 
 				// get font that use the same texture as the font that is destroyed
-				const petsWithSameTexture = this.fonts.filter(
+				const fontsWithSameTexture = this.fonts.filter(
 					(font: Font) => font.texture.key === this.fonts[index].texture.key,
 				);
 
 				// remove texture if there is only one font that use the texture because we don't need it anymore
-				if (petsWithSameTexture.length === 1) {
+				if (fontsWithSameTexture.length === 1) {
 					this.textures.remove(font.texture.key);
 				}
 
-				// remove index from petClimbAndCrawlIndex if it exist because the font is destroyed
-				if (this.petClimbAndCrawlIndex.includes(index)) {
-					this.petClimbAndCrawlIndex = this.petClimbAndCrawlIndex.filter(
+				// remove index from fontClimbAndCrawlIndex if it exist because the font is destroyed
+				if (this.fontClimbAndCrawlIndex.includes(index)) {
+					this.fontClimbAndCrawlIndex = this.fontClimbAndCrawlIndex.filter(
 						(i) => i !== index,
 					);
 				}
@@ -409,30 +409,30 @@ export default class Fonts extends Phaser.Scene {
 	updateMovement(font: Font): void {
 		switch (font.direction) {
 			case Direction.RIGHT:
-				font.setVelocity(this.PET_MOVE_VELOCITY, 0);
+				font.setVelocity(this.font_MOVE_VELOCITY, 0);
 				font.setAcceleration(0);
 				this.setFontLookToTheLeft(font, false);
 				break;
 			case Direction.LEFT:
-				font.setVelocity(-this.PET_MOVE_VELOCITY, 0);
+				font.setVelocity(-this.font_MOVE_VELOCITY, 0);
 				font.setAcceleration(0);
 				this.setFontLookToTheLeft(font, true);
 				break;
 			case Direction.UP:
-				font.setVelocity(0, -this.PET_MOVE_VELOCITY);
+				font.setVelocity(0, -this.font_MOVE_VELOCITY);
 				font.setAcceleration(0);
 				break;
 			case Direction.DOWN:
-				font.setVelocity(0, this.PET_MOVE_VELOCITY);
-				font.setAcceleration(0, this.PET_MOVE_ACCELERATION);
+				font.setVelocity(0, this.font_MOVE_VELOCITY);
+				font.setAcceleration(0, this.font_MOVE_ACCELERATION);
 				break;
 			case Direction.UPSIDELEFT:
-				font.setVelocity(-this.PET_MOVE_VELOCITY);
+				font.setVelocity(-this.font_MOVE_VELOCITY);
 				font.setAcceleration(0);
 				this.setFontLookToTheLeft(font, true);
 				break;
 			case Direction.UPSIDERIGHT:
-				font.setVelocity(this.PET_MOVE_VELOCITY, -this.PET_MOVE_VELOCITY);
+				font.setVelocity(this.font_MOVE_VELOCITY, -this.font_MOVE_VELOCITY);
 				font.setAcceleration(0);
 				this.setFontLookToTheLeft(font, false);
 				break;
@@ -494,9 +494,9 @@ export default class Fonts extends Phaser.Scene {
 			});
 
 			if (state === "climb" || state === "crawl") {
-				this.petClimbAndCrawlIndex.push(this.fonts.indexOf(font));
+				this.fontClimbAndCrawlIndex.push(this.fonts.indexOf(font));
 			} else {
-				this.petClimbAndCrawlIndex = this.petClimbAndCrawlIndex.filter(
+				this.fontClimbAndCrawlIndex = this.fontClimbAndCrawlIndex.filter(
 					(index) => index !== this.fonts.indexOf(font),
 				);
 			}
@@ -533,7 +533,7 @@ export default class Fonts extends Phaser.Scene {
 			this.scaleFont(font, scaleValue);
 
 			// force font to jump or play random state when scale change
-			this.petJumpOrPlayRandomState(font);
+			this.fontJumpOrPlayRandomState(font);
 		});
 	}
 
@@ -688,7 +688,7 @@ export default class Fonts extends Phaser.Scene {
 		);
 	}
 
-	petJumpOrPlayRandomState(font: Font): void {
+	fontJumpOrPlayRandomState(font: Font): void {
 		if (!font) return;
 
 		if (font.availableStates.includes("jump")) {
@@ -699,7 +699,7 @@ export default class Fonts extends Phaser.Scene {
 		this.switchState(font, this.getOneRandomState(font));
 	}
 
-	petOnTheGroundPlayRandomState(font: Font): void {
+	fontOnTheGroundPlayRandomState(font: Font): void {
 		if (!font) {
 			return;
 		}
@@ -764,9 +764,9 @@ export default class Fonts extends Phaser.Scene {
 	}
 
 	randomJumpIfFontClimbAndCrawl(): void {
-		if (this.petClimbAndCrawlIndex.length === 0) return;
+		if (this.fontClimbAndCrawlIndex.length === 0) return;
 
-		for (const index of this.petClimbAndCrawlIndex) {
+		for (const index of this.fontClimbAndCrawlIndex) {
 			const font = this.fonts[index];
 			if (!font) continue;
 
@@ -871,7 +871,7 @@ export default class Fonts extends Phaser.Scene {
 		}
 	}
 
-	petBeyondScreenSwitchClimb(font: Font, worldBounding: IWorldBounding): void {
+	fontBeyondScreenSwitchClimb(font: Font, worldBounding: IWorldBounding): void {
 		if (!font) return;
 
 		// if font is climb and crawl, we don't want to switch state again
@@ -897,7 +897,7 @@ export default class Fonts extends Phaser.Scene {
 					 * i found out that the font will be stuck at the left side of the screen
 					 * which will result in font.x = negative number. Because we disable and enable
 					 * font body when drag, the font will go back with absolute value of font.x
-					 * so i get lastFontX to minus with petLeftPosition to get the correct position
+					 * so i get lastFontX to minus with fontLeftPosition to get the correct position
 					 */
 					font.setPosition(lastFontX - this.getFontLeftPosition(font), font.y);
 					this.setFontLookToTheLeft(font, true);
@@ -911,7 +911,7 @@ export default class Fonts extends Phaser.Scene {
 					this.toggleFlipXThenUpdateDirection(font);
 				} else {
 					// if font bounding left or right and not on the ground, we make the font jump or spawn on the ground
-					this.petJumpOrPlayRandomState(font);
+					this.fontJumpOrPlayRandomState(font);
 				}
 			}
 		} else {
@@ -925,7 +925,7 @@ export default class Fonts extends Phaser.Scene {
 				}
 			} else {
 				// if font is not on the ground and they are not bounding left or right, we make the font jump or spawn on the ground
-				this.petJumpOrPlayRandomState(font);
+				this.fontJumpOrPlayRandomState(font);
 			}
 		}
 	}

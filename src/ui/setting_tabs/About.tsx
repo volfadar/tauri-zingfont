@@ -39,7 +39,7 @@ function About() {
 			{
 				title: t("Developed by:"),
 				link: {
-					url: "https://github.com/SeakMengs",
+					url: "https://github.com/volfadar",
 					label: t("@Seakmeng"),
 				},
 			},
@@ -47,21 +47,21 @@ function About() {
 				title: t("Source code:"),
 				link: {
 					url: "https://github.com/volfadar/tauri-zingfont.git",
-					label: t("@SeakMengs/ZingFont"),
+					label: t("@volfadar/tauri-zingfont"),
 				},
 			},
 			{
 				title: t("Report a bug:"),
 				link: {
 					url: "https://github.com/volfadar/tauri-zingfont.git/issues",
-					label: t("@SeakMengs/ZingFont/issues"),
+					label: t("@volfadar/tauri-zingfont/issues"),
 				},
 			},
 			{
 				title: t("Community: "),
 				link: {
 					url: "https://github.com/volfadar/tauri-zingfont.git/discussions",
-					label: t("@SeakMengs/ZingFont/discussions"),
+					label: t("@volfadar/tauri-zingfont/discussions"),
 				},
 			},
 			{

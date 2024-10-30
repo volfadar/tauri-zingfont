@@ -21,25 +21,25 @@ export function MyFonts() {
 	const { theme: colorScheme, fonts, setFonts } = useSettingStore();
 
 	const removeFont = useCallback(
-		async (petId: string) => {
+		async (fontId: string) => {
 			const userFontConfig = await getAppSettings({ configName: "fonts.json" });
 			let removedFontName = "";
 			const newConfig = userFontConfig.filter((font: ISpriteConfig) => {
-				if (font.id === petId) removedFontName = font.name;
-				return font.id !== petId;
+				if (font.id === fontId) removedFontName = font.name;
+				return font.id !== fontId;
 			});
 
 			setConfig({ configName: "fonts.json", newConfig: newConfig });
 			setFonts(newConfig);
 
-			// manually remove petCard dom to fix flickering problem
-			const petCardDom = document.getElementById(`petCard-id-${petId}`);
-			if (petCardDom) petCardDom.remove();
+			// manually remove fontCard dom to fix flickering problem
+			const fontCardDom = document.getElementById(`fontCard-id-${fontId}`);
+			if (fontCardDom) fontCardDom.remove();
 
 			if (newConfig.length === 0) noFontDialog();
 
 			// update font window to show new font
-			handleSettingChange(DispatchType.RemoveFont, petId);
+			handleSettingChange(DispatchType.RemoveFont, fontId);
 
 			notifications.show({
 				message: t("font name has been removed", { name: removedFontName }),
@@ -62,7 +62,7 @@ export function MyFonts() {
 	);
 
 	// we don't put fonts as dependency because it will cause flickering when we remove font
-	// so we manually remove petCard dom in removeFont function
+	// so we manually remove fontCard dom in removeFont function
 	const FontCards = useMemo(() => {
 		return fonts.map((font: ISpriteConfig, index: number) => {
 			return (

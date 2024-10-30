@@ -31,5 +31,5 @@ export interface ISettingTabs {
 }
 
 export enum DefaultConfigName {
-	PET_LINKER = "pet_linker.json",
+	font_LINKER = "font_linker.json",
 }

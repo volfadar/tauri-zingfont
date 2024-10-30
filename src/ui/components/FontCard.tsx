@@ -17,9 +17,9 @@ function FontCard({
 	btnFunctionCustom,
 	type,
 }: IFontCardProps) {
-	const { petStates, storeDictFontStates } = useFontStateStore();
+	const { fontStates, storeDictFontStates } = useFontStateStore();
 	const availableStates =
-		petStates[font.name] ?? Object.keys(font.states).map((state) => state);
+		fontStates[font.name] ?? Object.keys(font.states).map((state) => state);
 	const randomState =
 		availableStates[Math.floor(Math.random() * availableStates.length)];
 	const [playState, setPlayState] = useState<string>(randomState);
@@ -29,16 +29,16 @@ function FontCard({
 
 	// save font to memoization so that we can use it later to save some resource
 	useEffect(() => {
-		if (!Object.prototype.hasOwnProperty.call(petStates, font.name)) {
+		if (!Object.prototype.hasOwnProperty.call(fontStates, font.name)) {
 			storeDictFontStates(font.name, availableStates);
 		}
-	}, [availableStates, font.name, petStates, storeDictFontStates]);
+	}, [availableStates, font.name, fontStates, storeDictFontStates]);
 
 	return (
 		<>
 			{/* if the font is currently in user viewport, show it, otherwise destroy its dom because it take a lot of resource */}
 			<Box
-				id={`petCard-id-${font.id ?? font.customId}`}
+				id={`fontCard-id-${font.id ?? font.customId}`}
 				ref={ref}
 				className={classes.boxWrapper}
 				key={font.id ?? font.name}

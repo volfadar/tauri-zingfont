@@ -75,7 +75,7 @@ export const handleSettingChange: IHandleSettingChange = (
 			emitUpdateFontsEvent({ dispatchType, newValue });
 			return;
 		case DispatchType.ChangeFontScale:
-			setSettings({ setKey: "petScale", newValue: newValue });
+			setSettings({ setKey: "fontScale", newValue: newValue });
 			setFontScale(newValue as number);
 			emitUpdateFontsEvent({ dispatchType, newValue });
 			return;

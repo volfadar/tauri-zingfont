@@ -18,7 +18,7 @@ describe("SettingWindow", () => {
 // it("Should render font card", async () => {
 //     const font: ISpriteConfig = defaultFont[0];
 
-//     const petCardProps = {
+//     const fontCardProps = {
 //         btnLabel: "test",
 //         font: font,
 //         btnFunction: () => {
@@ -26,6 +26,6 @@ describe("SettingWindow", () => {
 //         },
 //         type: FontCardType.Add,
 //     }
-//     render(<FontCard {...petCardProps} />);
+//     render(<FontCard {...fontCardProps} />);
 //     expect(screen.getByText(font.name)).toBeDefined();
 // });

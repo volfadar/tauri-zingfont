@@ -13,7 +13,7 @@ function Updater({ shouldUpdate, manifest }: UpdaterPopupProps) {
 	useEffect(() => {
 		const getReleaseNote = async () => {
 			const res = await fetch(
-				`https://api.github.com/repos/SeakMengs/ZingFont/releases/latest`,
+				`https://api.github.com/repos/volfadar/ZingFont/releases/latest`,
 			);
 
 			if (res.ok) {
