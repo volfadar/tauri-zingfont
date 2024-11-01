@@ -24,7 +24,7 @@ const dataDefault: Data = {
 	fonts: [],
 	color: "#000",
 	text: "",
-	size: 96,
+	size: 64,
 	sizeSingle: 72,
 	pinned: [],
 	maxPinned: 0,

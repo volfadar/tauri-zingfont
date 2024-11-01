@@ -95,6 +95,7 @@ fn build_app() {
             conf::combine_config_path,
             cmd::get_mouse_position,
             cmd::open_folder,
+            cmd::toggle_cursor_events,
             utils::reopen_main_window,
             // utils::open_setting_window,
         ])

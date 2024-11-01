@@ -1,5 +1,5 @@
+import { useCursorEvents } from "@/hooks/use-cursor-events";
 import { invoke } from "@tauri-apps/api/tauri";
-import { appWindow } from "@tauri-apps/api/window";
 import {
 	AnimatePresence,
 	motion,
@@ -22,6 +22,9 @@ export default function StickyNote() {
 	const [hasSnapped, setHasSnapped] = useState(false);
 	const noteRef = useRef<HTMLDivElement>(null);
 
+	// Use the cursor events hook
+	useCursorEvents(noteRef);
+
 	// Base motion values
 	const mouseX = useMotionValue(targetPosition.x);
 	const mouseY = useMotionValue(targetPosition.y);
@@ -35,31 +38,6 @@ export default function StickyNote() {
 		mouseX.set(targetPosition.x);
 		mouseY.set(targetPosition.y);
 	}, [targetPosition, mouseX, mouseY]);
-
-	useEffect(() => {
-		const checkMousePosition = async () => {
-			try {
-				const pos: any = await invoke("get_mouse_position");
-				if (!pos) return;
-
-				const noteRect = noteRef.current?.getBoundingClientRect();
-				if (!noteRect) return;
-
-				const isOverNote =
-					pos.clientX >= noteRect.left &&
-					pos.clientX <= noteRect.right &&
-					pos.clientY >= noteRect.top &&
-					pos.clientY <= noteRect.bottom;
-
-				await appWindow.setIgnoreCursorEvents(!isOverNote);
-			} catch (error) {
-				console.error("Error checking mouse position:", error);
-			}
-		};
-
-		const interval = setInterval(checkMousePosition, 50);
-		return () => clearInterval(interval);
-	}, []);
 
 	const handleMouseDown = async () => {
 		if (!hasSnapped) {
