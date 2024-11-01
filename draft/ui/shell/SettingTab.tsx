@@ -1,8 +1,8 @@
-import { UnstyledButton, Tooltip } from "@mantine/core";
+import { Tooltip, UnstyledButton } from "@mantine/core";
+import clsx from "clsx";
 import { memo } from "react";
 import type { ISettingTabProps } from "../../types/components/type";
 import { PrimaryColor } from "../../utils";
-import clsx from "clsx";
 import classes from "./SettingTab.module.css";
 
 function SettingTab({ Icon, label, active, handleSetTab }: ISettingTabProps) {

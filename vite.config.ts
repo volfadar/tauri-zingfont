@@ -1,8 +1,10 @@
+import { TanStackRouterVite } from "@tanstack/router-plugin/vite";
 import react from "@vitejs/plugin-react";
+import path from "node:path";
+import tailwindcss from "tailwindcss";
 import checker from "vite-plugin-checker";
 import tsconfigPaths from "vite-tsconfig-paths";
 import { defineConfig } from "vitest/config";
-
 // https://vitejs.dev/config/
 export default defineConfig({
 	plugins: [
@@ -12,7 +14,18 @@ export default defineConfig({
 			// e.g. use TypeScript check
 			typescript: true,
 		}),
+		TanStackRouterVite(),
 	],
+	css: {
+		postcss: {
+			plugins: [tailwindcss()],
+		},
+	},
+	resolve: {
+		alias: {
+			"@/": path.resolve(__dirname, "./src"),
+		},
+	},
 
 	// Vite options tailored for Tauri development and only applied in `tauri dev` or `tauri build`
 	// prevent vite from obscuring rust errors
@@ -51,5 +64,8 @@ export default defineConfig({
 				},
 			},
 		},
+	},
+	optimizeDeps: {
+		entries: ["src/**/*.{ts,tsx}"],
 	},
 });

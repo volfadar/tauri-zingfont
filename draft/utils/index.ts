@@ -5,7 +5,7 @@ import { WebviewWindow } from "@tauri-apps/api/window";
 import i18next from "i18next";
 import { error } from "tauri-plugin-log-api";
 
-export const PrimaryColor = "pink";
+export const PrimaryColor = "blue";
 export const ButtonVariant = "outline";
 export const CanvasSize = 224;
 

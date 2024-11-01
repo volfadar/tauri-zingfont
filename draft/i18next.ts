@@ -1,7 +1,6 @@
-import English from "./locale/en/translation.json";
-import Khmer from "./locale/kh/translation.json";
 import i18next from "i18next";
 import { initReactI18next } from "react-i18next";
+import English from "./locale/en/translation.json";
 
 const defaultLanguage = "en";
 
@@ -11,9 +10,6 @@ i18next.use(initReactI18next).init({
 	resources: {
 		en: {
 			translation: English,
-		},
-		kh: {
-			translation: Khmer,
 		},
 	},
 });

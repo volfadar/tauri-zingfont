@@ -149,7 +149,7 @@ function SettingWindow() {
 							justify={"space-between"}
 							align={"center"}
 						>
-							<Stack justify="center" align={"center"}>
+							<Stack justify="center" align={"center"} className="bg-black">
 								<Logo />
 								<AppShell.Section mt={50}>
 									<Stack justify="center" align={"center"} gap={5}>

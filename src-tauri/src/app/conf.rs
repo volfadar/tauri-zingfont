@@ -30,7 +30,7 @@ impl AppConfig {
             Err(err) => {
                 error!("Error reading settings.json: {}", err);
                 AppConfig {
-                    theme: "dark".to_string(),
+                    theme: "light".to_string(),
                     language: "en".to_string(),
                     allow_font_above_taskbar: false,
                     allow_font_interaction: true,
